@@ -12,13 +12,15 @@ const PokemonDetail = () => {
   const [showEditPokeForm, setShowEditPokeForm] = useState(false);
   const [editItemId, setEditItemId] = useState(null);
 
+console.log('pokemon', pokemon)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getPokemonDetail(pokemonId))
     setShowEditPokeForm(false);
     setEditItemId(null);
 
-    dispatch(getPokemonDetail())
   }, [pokemonId, dispatch]);
 
   if (!pokemon || !pokemon.moves) {
@@ -29,16 +31,16 @@ const PokemonDetail = () => {
 
   if (editItemId) {
     content = (
-      <ItemForm 
-        itemId={editItemId} 
-        hideForm={() => setEditItemId(null)} 
+      <ItemForm
+        itemId={editItemId}
+        hideForm={() => setEditItemId(null)}
       />
     );
   } else if (showEditPokeForm && pokemon.captured) {
     content = (
-      <EditPokemonForm 
-        pokemon={pokemon} 
-        hideForm={() => setShowEditPokeForm(false)} 
+      <EditPokemonForm
+        pokemon={pokemon}
+        hideForm={() => setShowEditPokeForm(false)}
       />
     );
   } else {
@@ -71,7 +73,7 @@ const PokemonDetail = () => {
         </div>
         <div>
           <h2>
-            Items 
+            Items
             <button> + </button>
           </h2>
           <table>
